@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Online-Service | Zahnarzt Mirzaie</title>
+    <link rel="icon" type="image/svg+xml" href="images/favicon.svg">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+<nav class="nav">
+    <div class="nav-container">
+        <a href="index.html" class="nav-logo">
+            <div class="nav-logo-icon">M</div>
+            <span>Zahnarzt Mirzaie</span>
+        </a>
+        <button class="nav-toggle" aria-label="Menü öffnen">
+            <span></span>
+            <span></span>
+            <span></span>
+        </button>
+    </div>
+</nav>
+
+<div class="nav-menu">
+    <div class="nav-menu-content">
+        <ul class="nav-links">
+            <li><a href="index.html">Start</a></li>
+            <li><a href="leistungen.html">Leistungen</a></li>
+            <li><a href="praxis.html">Unsere Praxis</a></li>
+            <li><a href="service.html">Online-Service</a></li>
+            <li><a href="kontakt.html">Kontakt</a></li>
+            <li><a href="karriere.html">Karriere</a></li>
+        </ul>
+        <div class="nav-cta-menu">
+            <a href="termin.html" class="btn btn-primary btn-lg">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="18" height="18"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+                Termin anfragen
+            </a>
+            <a href="karriere.html" class="btn btn-secondary btn-lg">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="18" height="18"><path d="M16 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="8.5" cy="7" r="4"/><line x1="20" y1="8" x2="20" y2="14"/><line x1="23" y1="11" x2="17" y2="11"/></svg>
+                Jetzt bewerben
+            </a>
+            <a href="tel:042811515" class="nav-phone-menu">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.362 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.91.338 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+                04281 1515
+            </a>
+        </div>
+    </div>
+</div>
+    
+
+    <section class="page-hero">
+        <div class="container">
+            <h1>Online-Service</h1>
+            <p class="lead">Bequem von zu Hause: Termin anfragen, Anamnesebogen ausfüllen und Fragen stellen.</p>
+        </div>
+    </section>
+
+    <section class="portal-section">
+        <div class="container">
+            <div class="portal-grid">
+                <div class="portal-card" onclick="window.location.href='termin.html'">
+                    <div class="portal-icon"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M6.75 3v2.25M17.25 3v2.25M3 18.75V7.5a2.25 2.25 0 0 1 2.25-2.25h13.5A2.25 2.25 0 0 1 21 7.5v11.25m-18 0A2.25 2.25 0 0 0 5.25 21h13.5A2.25 2.25 0 0 0 21 18.75m-18 0v-7.5A2.25 2.25 0 0 1 5.25 9h13.5A2.25 2.25 0 0 1 21 11.25v7.5"/></svg></div>
+                    <h3>Termin anfragen</h3>
+                    <p>Fragen Sie online Ihren Wunschtermin an.</p>
+                    <span class="btn btn-primary btn-sm">Jetzt anfragen</span>
+                </div>
+                <div class="portal-card" onclick="openModal('anamnese-modal')">
+                    <div class="portal-icon"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12h3.75M9 15h3.75M9 18h3.75m3 .75H18a2.25 2.25 0 0 0 2.25-2.25V6.108c0-1.135-.845-2.098-1.976-2.192a48.424 48.424 0 0 0-1.123-.08m-5.801 0c-.065.21-.1.433-.1.664 0 .414.336.75.75.75h4.5a.75.75 0 0 0 .75-.75 2.25 2.25 0 0 0-.1-.664m-5.8 0A2.251 2.251 0 0 1 13.5 2.25H15c1.012 0 1.867.668 2.15 1.586m-5.8 0c-.376.023-.75.05-1.124.08C9.095 4.01 8.25 4.973 8.25 6.108V8.25m0 0H4.875c-.621 0-1.125.504-1.125 1.125v11.25c0 .621.504 1.125 1.125 1.125h9.75c.621 0 1.125-.504 1.125-1.125V9.375c0-.621-.504-1.125-1.125-1.125H8.25Z"/></svg></div>
+                    <h3>Anamnesebogen</h3>
+                    <p>Füllen Sie den Bogen vor Ihrem Termin aus.</p>
+                    <span class="btn btn-primary btn-sm">Bogen ausfüllen</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ANAMNESE MODAL -->
+    <div class="modal" id="anamnese-modal">
+        <div class="modal-backdrop"></div>
+        <div class="modal-content" style="max-width:700px">
+            <div class="modal-header">
+                <h3>Anamnesebogen</h3>
+                <button class="modal-close"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M6 18 18 6M6 6l12 12"/></svg></button>
+            </div>
+            <div class="modal-body">
+                <div class="funnel-progress">
+                    <div class="funnel-step active"></div>
+                    <div class="funnel-step"></div>
+                    <div class="funnel-step"></div>
+                    <div class="funnel-step"></div>
+                    <div class="funnel-step"></div>
+                </div>
+                
+                <!-- Step 1: Persönliche Daten -->
+                <div class="funnel-content active" data-step="1">
+                    <h4 style="margin-bottom:8px;color:var(--text)">Persönliche Daten</h4>
+                    <p style="margin-bottom:24px;font-size:0.9375rem">Grundlegende Informationen zu Ihrer Person.</p>
+                    <div class="form-row"><div class="form-group"><label class="form-label">Vorname <span class="required">*</span></label><input type="text" class="form-input" id="ana-vorname" required></div><div class="form-group"><label class="form-label">Nachname <span class="required">*</span></label><input type="text" class="form-input" id="ana-nachname" required></div></div>
+                    <div class="form-row"><div class="form-group"><label class="form-label">Geburtsdatum <span class="required">*</span></label><input type="date" class="form-input" id="ana-geb" required></div><div class="form-group"><label class="form-label">Geschlecht</label><select class="form-select" id="ana-geschlecht"><option value="">Bitte wählen</option><option>Männlich</option><option>Weiblich</option><option>Divers</option></select></div></div>
+                    <div class="form-row"><div class="form-group"><label class="form-label">Telefon <span class="required">*</span></label><input type="tel" class="form-input" id="ana-tel" required></div><div class="form-group"><label class="form-label">E-Mail <span class="required">*</span></label><input type="email" class="form-input" id="ana-email" required></div></div>
+                    <div class="funnel-buttons"><button class="btn btn-primary" onclick="nextStep('anamnese-modal', 1)">Weiter</button></div>
+                </div>
+                
+                <!-- Step 2: Gesundheit -->
+                <div class="funnel-content" data-step="2">
+                    <h4 style="margin-bottom:8px;color:var(--text)">Allgemeine Gesundheit</h4>
+                    <p style="margin-bottom:24px;font-size:0.9375rem">Informationen zu Ihrer gesundheitlichen Situation.</p>
+                    <div class="form-group"><label class="form-label">Sind Sie in ärztlicher Behandlung?</label><select class="form-select" id="ana-behandlung"><option value="">Bitte wählen</option><option>Nein</option><option>Ja</option></select></div>
+                    <div class="form-group"><label class="form-label">Medikamente</label><textarea class="form-textarea" id="ana-medikamente" rows="2" placeholder="Welche Medikamente nehmen Sie regelmäßig?"></textarea></div>
+                    <div class="funnel-buttons"><button class="btn btn-back" onclick="prevStep('anamnese-modal', 2)">Zurück</button><button class="btn btn-primary" onclick="nextStep('anamnese-modal', 2)">Weiter</button></div>
+                </div>
+                
+                <!-- Step 3: Erkrankungen -->
+                <div class="funnel-content" data-step="3">
+                    <h4 style="margin-bottom:8px;color:var(--text)">Erkrankungen</h4>
+                    <p style="margin-bottom:24px;font-size:0.9375rem">Bitte kreuzen Sie zutreffende Erkrankungen an.</p>
+                    <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:20px">
+                        <label class="form-checkbox"><input type="checkbox" id="ana-herz"><span>Herz-Kreislauf</span></label>
+                        <label class="form-checkbox"><input type="checkbox" id="ana-blutdruck"><span>Bluthochdruck</span></label>
+                        <label class="form-checkbox"><input type="checkbox" id="ana-diabetes"><span>Diabetes</span></label>
+                        <label class="form-checkbox"><input type="checkbox" id="ana-schilddruese"><span>Schilddrüse</span></label>
+                        <label class="form-checkbox"><input type="checkbox" id="ana-asthma"><span>Asthma</span></label>
+                        <label class="form-checkbox"><input type="checkbox" id="ana-blutgerinnung"><span>Blutgerinnung</span></label>
+                        <label class="form-checkbox"><input type="checkbox" id="ana-hepatitis"><span>Hepatitis</span></label>
+                        <label class="form-checkbox"><input type="checkbox" id="ana-epilepsie"><span>Epilepsie</span></label>
+                    </div>
+                    <div class="form-group"><label class="form-label">Sonstige Erkrankungen</label><input type="text" class="form-input" id="ana-sonstige" placeholder="Weitere relevante Erkrankungen..."></div>
+                    <div class="funnel-buttons"><button class="btn btn-back" onclick="prevStep('anamnese-modal', 3)">Zurück</button><button class="btn btn-primary" onclick="nextStep('anamnese-modal', 3)">Weiter</button></div>
+                </div>
+                
+                <!-- Step 4: Allergien -->
+                <div class="funnel-content" data-step="4">
+                    <h4 style="margin-bottom:8px;color:var(--text)">Allergien & Unverträglichkeiten</h4>
+                    <p style="margin-bottom:24px;font-size:0.9375rem">Wichtig für Ihre Sicherheit bei der Behandlung.</p>
+                    <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:20px">
+                        <label class="form-checkbox"><input type="checkbox" id="ana-penicillin"><span>Penicillin</span></label>
+                        <label class="form-checkbox"><input type="checkbox" id="ana-schmerzmittel"><span>Schmerzmittel</span></label>
+                        <label class="form-checkbox"><input type="checkbox" id="ana-betaeubung"><span>Betäubungsmittel</span></label>
+                        <label class="form-checkbox"><input type="checkbox" id="ana-latex"><span>Latex</span></label>
+                    </div>
+                    <div class="form-group"><label class="form-label">Weitere Allergien</label><input type="text" class="form-input" id="ana-allergien-sonstige" placeholder="z.B. Pollen, Nahrungsmittel..."></div>
+                    <div class="funnel-buttons"><button class="btn btn-back" onclick="prevStep('anamnese-modal', 4)">Zurück</button><button class="btn btn-primary" onclick="nextStep('anamnese-modal', 4)">Weiter</button></div>
+                </div>
+                
+                <!-- Step 5: Abschluss -->
+                <div class="funnel-content" data-step="5">
+                    <h4 style="margin-bottom:8px;color:var(--text)">Zahnärztliche Informationen</h4>
+                    <p style="margin-bottom:24px;font-size:0.9375rem">Fast geschafft! Noch ein paar letzte Fragen.</p>
+                    <form action="https://getform.io/f/bmdjjyra" method="POST" id="anamnese-form">
+                        <input type="hidden" name="_gotcha" style="display:none">
+                        <input type="hidden" name="_redirect" value="danke.html">
+                        <input type="hidden" name="formular" value="Anamnesebogen">
+                        <input type="hidden" name="daten" id="ana-alle-daten">
+                        <div class="form-group"><label class="form-label">Grund Ihres Besuchs</label><textarea name="besuchsgrund" class="form-textarea" rows="2" placeholder="Was führt Sie zu uns?"></textarea></div>
+                        <div class="form-group"><label class="form-label">Letzter Zahnarztbesuch</label><select name="letzter_besuch" class="form-select"><option value="">Bitte wählen</option><option>Vor weniger als 6 Monaten</option><option>Vor 6-12 Monaten</option><option>Vor 1-2 Jahren</option><option>Vor mehr als 2 Jahren</option></select></div>
+                        <div class="form-group"><label class="form-checkbox"><input type="checkbox" name="richtigkeit" required><span>Ich bestätige die Richtigkeit meiner Angaben.</span></label></div>
+                        <div class="form-group"><label class="form-checkbox"><input type="checkbox" name="datenschutz" required><span>Ich stimme der <a href="datenschutz.html" target="_blank">Datenschutzerklärung</a> zu.</span></label></div>
+                        <div class="funnel-buttons"><button type="button" class="btn btn-back" onclick="prevStep('anamnese-modal', 5)">Zurück</button><button type="submit" class="btn btn-primary" onclick="collectAnamneseData()">Absenden</button></div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer class="footer">
+    <div class="container">
+        <div class="footer-grid">
+            <div class="footer-brand">
+                <a href="index.html" class="nav-logo">
+                    <div class="nav-logo-icon">M</div>
+                    <span>Zahnarzt Mirzaie</span>
+                </a>
+                <p>Ihre moderne Zahnarztpraxis in Zeven. Wir verbinden langjährige Erfahrung mit neuester Technologie – für Ihre Zahngesundheit.</p>
+            </div>
+            <div>
+                <h4>Navigation</h4>
+                <ul class="footer-links">
+                    <li><a href="index.html">Start</a></li>
+                    <li><a href="leistungen.html">Leistungen</a></li>
+                    <li><a href="praxis.html">Unsere Praxis</a></li>
+                    <li><a href="kontakt.html">Kontakt</a></li>
+                    <li><a href="karriere.html">Karriere</a></li>
+                </ul>
+            </div>
+            <div>
+                <h4>Online-Service</h4>
+                <ul class="footer-links">
+                    <li><a href="termin.html">Termin buchen</a></li>
+                    <li><a href="service.html">Anamnesebogen</a></li>
+                </ul>
+            </div>
+            <div>
+                <h4>Kontakt</h4>
+                <div class="footer-contact-item">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+                    <span>Schulstraße 12<br>27404 Zeven</span>
+                </div>
+                <div class="footer-contact-item">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.362 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.91.338 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+                    <a href="tel:042811515">04281 1515</a>
+                </div>
+                <div class="footer-contact-item">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+                    <a href="mailto:praxis_mirzaie@web.de">praxis_mirzaie@web.de</a>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>© 2025 Zahnarzt Mirzaie. Alle Rechte vorbehalten.</p>
+            <div class="footer-legal">
+                <a href="impressum.html">Impressum</a>
+                <a href="datenschutz.html">Datenschutz</a>
+            </div>
+        </div>
+    </div>
+</footer>
+
+    <script src="js/main.js"></script>
+    <script>
+    function collectAnamneseData() {
+        const data = {
+            vorname: document.getElementById('ana-vorname').value,
+            nachname: document.getElementById('ana-nachname').value,
+            geburtsdatum: document.getElementById('ana-geb').value,
+            geschlecht: document.getElementById('ana-geschlecht').value,
+            telefon: document.getElementById('ana-tel').value,
+            email: document.getElementById('ana-email').value,
+            behandlung: document.getElementById('ana-behandlung').value,
+            medikamente: document.getElementById('ana-medikamente').value,
+            erkrankungen: [],
+            allergien: [],
+            sonstige: document.getElementById('ana-sonstige').value
+        };
+        if(document.getElementById('ana-herz').checked) data.erkrankungen.push('Herz-Kreislauf');
+        if(document.getElementById('ana-blutdruck').checked) data.erkrankungen.push('Bluthochdruck');
+        if(document.getElementById('ana-diabetes').checked) data.erkrankungen.push('Diabetes');
+        if(document.getElementById('ana-schilddruese').checked) data.erkrankungen.push('Schilddrüse');
+        if(document.getElementById('ana-asthma').checked) data.erkrankungen.push('Asthma');
+        if(document.getElementById('ana-blutgerinnung').checked) data.erkrankungen.push('Blutgerinnung');
+        if(document.getElementById('ana-hepatitis').checked) data.erkrankungen.push('Hepatitis');
+        if(document.getElementById('ana-epilepsie').checked) data.erkrankungen.push('Epilepsie');
+        if(document.getElementById('ana-penicillin').checked) data.allergien.push('Penicillin');
+        if(document.getElementById('ana-schmerzmittel').checked) data.allergien.push('Schmerzmittel');
+        if(document.getElementById('ana-betaeubung').checked) data.allergien.push('Betäubung');
+        if(document.getElementById('ana-latex').checked) data.allergien.push('Latex');
+        document.getElementById('ana-alle-daten').value = JSON.stringify(data);
+    }
+    </script>
+</body>
+</html>

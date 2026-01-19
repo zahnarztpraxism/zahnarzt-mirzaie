@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 50 50">
+  <defs>
+    <linearGradient id="g" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#0071e3"/>
+      <stop offset="100%" style="stop-color:#00c7be"/>
+    </linearGradient>
+  </defs>
+  <!-- Moderner stilisierter Zahn -->
+  <path d="M25 5 C15 5, 8 12, 8 22 C8 28, 10 33, 14 38 C16 41, 18 45, 20 45 C22 45, 23 42, 25 38 C27 42, 28 45, 30 45 C32 45, 34 41, 36 38 C40 33, 42 28, 42 22 C42 12, 35 5, 25 5 Z" fill="url(#g)"/>
+  <!-- Glanz-Effekt -->
+  <ellipse cx="18" cy="18" rx="5" ry="7" fill="rgba(255,255,255,0.3)"/>
+</svg>

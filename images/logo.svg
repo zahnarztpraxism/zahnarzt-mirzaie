@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 60">
+  <defs>
+    <linearGradient id="logoGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#0071e3"/>
+      <stop offset="100%" style="stop-color:#00c7be"/>
+    </linearGradient>
+  </defs>
+  <!-- Stylized Tooth/M Icon -->
+  <g transform="translate(0, 5)">
+    <!-- Abstract tooth shape that forms an M -->
+    <path d="M10 45 Q10 15, 25 15 Q32 15, 32 25 L32 35 Q32 38, 30 38 Q28 38, 28 35 L28 28 Q28 22, 25 22 Q22 22, 22 28 L22 45 Q22 48, 19 48 Q16 48, 16 45 L16 28 Q16 22, 13 22 Q10 22, 10 28 Z" fill="url(#logoGrad)"/>
+    <path d="M38 45 L38 28 Q38 22, 41 22 Q44 22, 44 28 L44 35 Q44 38, 46 38 Q48 38, 48 35 L48 25 Q48 15, 55 15 Q70 15, 70 45 L70 48 Q70 50, 67 50 L64 50 Q61 50, 61 45 L61 28 Q61 22, 58 22 Q55 22, 55 28 L55 45 Q55 48, 52 48 Q49 48, 49 45 L49 28 Q49 25, 46 25 Q44 25, 44 28 L44 45 Q44 48, 41 48 Q38 48, 38 45 Z" fill="url(#logoGrad)"/>
+  </g>
+  <!-- Text -->
+  <text x="82" y="32" font-family="Inter, -apple-system, sans-serif" font-size="22" font-weight="700" fill="#1d1d1f">MIRZAIE</text>
+  <text x="82" y="48" font-family="Inter, -apple-system, sans-serif" font-size="11" font-weight="500" fill="#6e6e73" letter-spacing="0.15em">ZAHNARZTPRAXIS</text>
+</svg>
