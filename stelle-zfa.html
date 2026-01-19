@@ -156,18 +156,19 @@
                 <div class="funnel-content" data-step="3" id="bew-step3">
                     <h4 style="margin-bottom:8px;color:var(--text)">Fast geschafft!</h4>
                     <p style="margin-bottom:24px;font-size:0.9375rem">Noch ein paar letzte Worte von dir.</p>
-                    <form action="https://forminit.com/f/itxljr9u337" method="POST" id="bewerbung-form">
-                        <input type="hidden" name="formular" value="Bewerbung ZFA">
-                        <input type="hidden" name="vorname" id="bew-vorname-h">
-                        <input type="hidden" name="nachname" id="bew-nachname-h">
-                        <input type="hidden" name="email" id="bew-email-h">
-                        <input type="hidden" name="telefon" id="bew-tel-h">
-                        <input type="hidden" name="wohnort" id="bew-ort-h">
-                        <input type="hidden" name="eintritt" id="bew-eintritt-h">
-                        <input type="hidden" name="erfahrung" id="bew-erfahrung-h">
-                        <div class="form-group"><label class="form-label">Warum möchtest du bei uns arbeiten? <span class="required">*</span></label><textarea name="motivation" class="form-textarea" rows="4" required placeholder="Was reizt dich an der Stelle?"></textarea></div>
-                        <div class="form-group"><label class="form-checkbox"><input type="checkbox" name="datenschutz" required><span>Ich stimme der <a href="datenschutz.html" target="_blank">Datenschutzerklärung</a> zu.</span></label></div>
+                    <form id="bewerbung-form">
+                        <input type="hidden" name="fi-text-formular" value="Bewerbung ZFA">
+                        <input type="hidden" name="fi-sender-firstName" id="bew-vorname-h">
+                        <input type="hidden" name="fi-sender-lastName" id="bew-nachname-h">
+                        <input type="hidden" name="fi-sender-email" id="bew-email-h">
+                        <input type="hidden" name="fi-sender-phone" id="bew-tel-h">
+                        <input type="hidden" name="fi-text-wohnort" id="bew-ort-h">
+                        <input type="hidden" name="fi-text-eintritt" id="bew-eintritt-h">
+                        <input type="hidden" name="fi-text-erfahrung" id="bew-erfahrung-h">
+                        <div class="form-group"><label class="form-label">Warum möchtest du bei uns arbeiten? <span class="required">*</span></label><textarea name="fi-text-motivation" class="form-textarea" rows="4" required placeholder="Was reizt dich an der Stelle?"></textarea></div>
+                        <div class="form-group"><label class="form-checkbox"><input type="checkbox" required><span>Ich stimme der <a href="datenschutz.html" target="_blank">Datenschutzerklärung</a> zu.</span></label></div>
                         <div class="funnel-buttons"><button type="button" class="btn btn-back" onclick="bewPrevStep(3)">Zurück</button><button type="submit" class="btn btn-primary" onclick="collectBewData()">Bewerbung absenden</button></div>
+                        <p id="form-result" class="form-result"></p>
                     </form>
                 </div>
             </div>
@@ -255,6 +256,26 @@
         document.getElementById('bew-eintritt-h').value = document.getElementById('bew-eintritt').value;
         document.getElementById('bew-erfahrung-h').value = document.getElementById('bew-erfahrung').value;
     }
+    </script>
+    <script src="https://forminit.com/sdk/v1/forminit.js"></script>
+    <script>
+    const forminit = new Forminit();
+    const FORM_ID = 'itxljr9u337';
+    
+    document.getElementById('bewerbung-form').addEventListener('submit', async function(e) {
+        e.preventDefault();
+        collectBewData();
+        const formData = new FormData(this);
+        const { data, error } = await forminit.submit(FORM_ID, formData);
+        
+        if (error) {
+            document.getElementById('form-result').textContent = 'Fehler: ' + error.message;
+            document.getElementById('form-result').style.color = 'red';
+            return;
+        }
+        
+        window.location.href = 'danke.html';
+    });
     </script>
 </body>
 </html>

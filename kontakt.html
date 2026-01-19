@@ -106,25 +106,25 @@
             <div class="contact-form">
                 <h3>Nachricht senden</h3>
                 <p>Schreiben Sie uns – wir melden uns schnellstmöglich bei Ihnen.</p>
-                <form action="https://forminit.com/f/itxljr9u337" method="POST">
-                    <input type="hidden" name="formular" value="Kontaktformular">
+                <form id="kontakt-form">
+                    <input type="hidden" name="fi-text-formular" value="Kontaktformular">
                     <div class="form-row">
                         <div class="form-group">
                             <label class="form-label">Ihr Name</label>
-                            <input type="text" name="name" class="form-input" required>
+                            <input type="text" name="fi-sender-fullName" class="form-input" required>
                         </div>
                         <div class="form-group">
                             <label class="form-label">Telefon</label>
-                            <input type="tel" name="telefon" class="form-input">
+                            <input type="tel" name="fi-sender-phone" class="form-input">
                         </div>
                     </div>
                     <div class="form-group">
                         <label class="form-label">E-Mail-Adresse</label>
-                        <input type="email" name="email" class="form-input" required>
+                        <input type="email" name="fi-sender-email" class="form-input" required>
                     </div>
                     <div class="form-group">
                         <label class="form-label">Ihre Nachricht</label>
-                        <textarea name="nachricht" class="form-textarea" rows="4" required></textarea>
+                        <textarea name="fi-text-nachricht" class="form-textarea" rows="4" required></textarea>
                     </div>
                     <div class="form-group">
                         <label class="form-checkbox">
@@ -135,6 +135,7 @@
                     <div class="form-submit">
                         <button type="submit" class="btn btn-primary btn-lg">Nachricht senden</button>
                     </div>
+                    <p id="form-result" class="form-result"></p>
                 </form>
             </div>
         </div>
@@ -195,5 +196,24 @@
 </footer>
 
 <script src="js/main.js"></script>
+<script src="https://forminit.com/sdk/v1/forminit.js"></script>
+<script>
+const forminit = new Forminit();
+const FORM_ID = 'itxljr9u337';
+
+document.getElementById('kontakt-form').addEventListener('submit', async function(e) {
+    e.preventDefault();
+    const formData = new FormData(this);
+    const { data, error } = await forminit.submit(FORM_ID, formData);
+    
+    if (error) {
+        document.getElementById('form-result').textContent = 'Fehler: ' + error.message;
+        document.getElementById('form-result').style.color = 'red';
+        return;
+    }
+    
+    window.location.href = 'danke.html';
+});
+</script>
 </body>
 </html>

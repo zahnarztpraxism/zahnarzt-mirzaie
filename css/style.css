@@ -1162,3 +1162,4 @@ section { padding: 60px 0; }
     .leistung-highlight { flex-direction: column; padding: 24px; }
     .ablauf-step { flex-direction: column; gap: 16px; }
 }
+.form-result { margin-top: 16px; padding: 12px; border-radius: 8px; text-align: center; }
