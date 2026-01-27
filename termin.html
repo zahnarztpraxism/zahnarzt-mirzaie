@@ -75,53 +75,85 @@
                     </div>
                 </div>
             </div>
-            <div class="booking-form">
+            <div class="booking-form" id="booking-form-container">
                 <h3>Online-Terminanfrage</h3>
-                <p>Füllen Sie das Formular aus – wir bestätigen Ihren Wunschtermin telefonisch.</p>
+                <p>Füllen Sie das Formular aus – wir bestätigen Ihren Wunschtermin per E-Mail oder telefonisch.</p>
                 <form id="termin-form">
-                    <input type="hidden" name="fi-text-formular" value="Terminanfrage">
                     <div class="form-row">
                         <div class="form-group">
-                            <label class="form-label">Ihr Name</label>
-                            <input type="text" name="fi-sender-fullName" class="form-input" required>
+                            <label class="form-label">Ihr Name <span class="required">*</span></label>
+                            <input type="text" name="name" id="termin-name" class="form-input" required placeholder="Max Mustermann">
                         </div>
                         <div class="form-group">
-                            <label class="form-label">Telefon</label>
-                            <input type="tel" name="fi-sender-phone" class="form-input" required>
+                            <label class="form-label">Telefon <span class="required">*</span></label>
+                            <input type="tel" name="telefon" id="termin-telefon" class="form-input" required placeholder="0170 1234567">
                         </div>
                     </div>
                     <div class="form-row">
                         <div class="form-group">
                             <label class="form-label">E-Mail <span class="required">*</span></label>
-                            <input type="email" name="fi-sender-email" class="form-input" required>
+                            <input type="email" name="email" id="termin-email" class="form-input" required placeholder="ihre@email.de">
                         </div>
                         <div class="form-group">
                             <label class="form-label">Wunschdatum</label>
-                            <input type="date" name="fi-date-wunschdatum" class="form-input">
+                            <input type="date" name="wunschdatum" id="termin-datum" class="form-input">
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label class="form-label">Wunschzeit</label>
+                            <select name="wunschzeit" id="termin-zeit" class="form-select">
+                                <option value="">Bitte wählen...</option>
+                                <option value="Vormittags (8:30-12:30)">Vormittags (8:30-12:30)</option>
+                                <option value="Nachmittags (14:30-18:00)">Nachmittags (14:30-18:00)</option>
+                                <option value="Flexibel">Flexibel</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Behandlungsgrund</label>
+                            <select name="behandlung" id="termin-behandlung" class="form-select">
+                                <option value="">Bitte wählen...</option>
+                                <option value="Kontrolluntersuchung">Kontrolluntersuchung</option>
+                                <option value="Professionelle Zahnreinigung">Professionelle Zahnreinigung</option>
+                                <option value="Schmerzbehandlung">Schmerzbehandlung</option>
+                                <option value="Beratungsgespräch">Beratungsgespräch</option>
+                                <option value="Implantologie">Implantologie</option>
+                                <option value="CEREC Zahnersatz">CEREC Zahnersatz</option>
+                                <option value="Sonstiges">Sonstiges</option>
+                            </select>
                         </div>
                     </div>
                     <div class="form-group">
-                        <label class="form-label">Behandlungsgrund</label>
-                        <select name="fi-select-behandlung" class="form-select">
-                            <option value="">Bitte wählen...</option>
-                            <option value="Kontrolluntersuchung">Kontrolluntersuchung</option>
-                            <option value="Professionelle Zahnreinigung">Professionelle Zahnreinigung</option>
-                            <option value="Schmerzbehandlung">Schmerzbehandlung</option>
-                            <option value="Beratungsgespräch">Beratungsgespräch</option>
-                            <option value="Sonstiges">Sonstiges</option>
-                        </select>
+                        <label class="form-label">Nachricht (optional)</label>
+                        <textarea name="nachricht" id="termin-nachricht" class="form-textarea" rows="3" placeholder="Haben Sie besondere Wünsche oder Anmerkungen?"></textarea>
                     </div>
                     <div class="form-group">
                         <label class="form-checkbox">
-                            <input type="checkbox" required>
-                            <span>Ich stimme der <a href="datenschutz.html">Datenschutzerklärung</a> zu.</span>
+                            <input type="checkbox" id="termin-datenschutz" required>
+                            <span>Ich stimme der <a href="datenschutz.html" target="_blank">Datenschutzerklärung</a> zu.</span>
                         </label>
                     </div>
                     <div class="form-submit">
-                        <button type="submit" class="btn btn-primary btn-lg">Termin anfragen</button>
+                        <button type="submit" class="btn btn-primary btn-lg" id="submit-btn">
+                            <span id="btn-text">Termin anfragen</span>
+                            <span id="btn-loading" style="display:none">Wird gesendet...</span>
+                        </button>
                     </div>
-                    <p id="form-result" class="form-result"></p>
+                    <p id="form-error" class="form-result" style="color:#ef4444;display:none"></p>
                 </form>
+            </div>
+            <!-- Erfolgsmeldung -->
+            <div class="booking-success" id="booking-success" style="display:none">
+                <div class="success-icon">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" style="width:48px;height:48px;color:#22c55e"><polyline points="20 6 9 17 4 12"/></svg>
+                </div>
+                <h3>Vielen Dank!</h3>
+                <p>Ihre Terminanfrage wurde erfolgreich übermittelt.</p>
+                <p style="color:var(--text-light);margin-top:8px">Wir melden uns innerhalb von 24 Stunden bei Ihnen, um den Termin zu bestätigen.</p>
+                <div style="margin-top:24px;display:flex;gap:12px;flex-wrap:wrap;justify-content:center">
+                    <a href="index.html" class="btn btn-primary">Zur Startseite</a>
+                    <a href="tel:042811515" class="btn btn-secondary">Oder gleich anrufen</a>
+                </div>
             </div>
         </div>
     </div>
@@ -181,24 +213,69 @@
 </footer>
 
 <script src="js/main.js"></script>
-<script src="https://forminit.com/sdk/v1/forminit.js"></script>
 <script>
-const forminit = new Forminit();
-const FORM_ID = 'itxljr9u337';
+// Backend-URL
+const API_URL = 'https://zahnarzt-booking-production.up.railway.app';
 
 document.getElementById('termin-form').addEventListener('submit', async function(e) {
     e.preventDefault();
-    const formData = new FormData(this);
-    const { data, error } = await forminit.submit(FORM_ID, formData);
-    
-    if (error) {
-        document.getElementById('form-result').textContent = 'Fehler: ' + error.message;
-        document.getElementById('form-result').style.color = 'red';
-        return;
+
+    const submitBtn = document.getElementById('submit-btn');
+    const btnText = document.getElementById('btn-text');
+    const btnLoading = document.getElementById('btn-loading');
+    const errorEl = document.getElementById('form-error');
+
+    // Button deaktivieren und Loading anzeigen
+    submitBtn.disabled = true;
+    btnText.style.display = 'none';
+    btnLoading.style.display = 'inline';
+    errorEl.style.display = 'none';
+
+    // Formulardaten sammeln
+    const data = {
+        name: document.getElementById('termin-name').value,
+        email: document.getElementById('termin-email').value,
+        telefon: document.getElementById('termin-telefon').value,
+        wunschdatum: document.getElementById('termin-datum').value || null,
+        wunschzeit: document.getElementById('termin-zeit').value || null,
+        behandlung: document.getElementById('termin-behandlung').value || null,
+        nachricht: document.getElementById('termin-nachricht').value || null
+    };
+
+    try {
+        const response = await fetch(`${API_URL}/api/termin-anfrage`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(data)
+        });
+
+        const result = await response.json();
+
+        if (result.success) {
+            // Formular ausblenden, Erfolgsmeldung zeigen
+            document.getElementById('booking-form-container').style.display = 'none';
+            document.getElementById('booking-success').style.display = 'block';
+            // Scroll zur Erfolgsmeldung
+            document.getElementById('booking-success').scrollIntoView({ behavior: 'smooth', block: 'center' });
+        } else {
+            throw new Error(result.error || 'Ein Fehler ist aufgetreten');
+        }
+    } catch (error) {
+        // Fehler anzeigen
+        errorEl.textContent = error.message || 'Verbindungsfehler. Bitte versuchen Sie es später erneut oder rufen Sie uns an.';
+        errorEl.style.display = 'block';
+
+        // Button wieder aktivieren
+        submitBtn.disabled = false;
+        btnText.style.display = 'inline';
+        btnLoading.style.display = 'none';
     }
-    
-    window.location.href = 'danke.html';
 });
+
+// Mindestdatum für Terminwahl auf heute setzen
+document.getElementById('termin-datum').min = new Date().toISOString().split('T')[0];
 </script>
 </body>
 </html>
