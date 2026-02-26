@@ -157,10 +157,8 @@
                     <h4 style="margin-bottom:8px;color:var(--text)">Zahnärztliche Informationen</h4>
                     <p style="margin-bottom:24px;font-size:0.9375rem">Fast geschafft! Noch ein paar letzte Fragen.</p>
                     <form id="anamnese-form">
-                        <input type="hidden" name="fi-text-formular" value="Anamnesebogen">
-                        <input type="hidden" name="fi-text-alle-daten" id="ana-alle-daten">
-                        <div class="form-group"><label class="form-label">Grund Ihres Besuchs</label><textarea name="fi-text-besuchsgrund" class="form-textarea" rows="2" placeholder="Was führt Sie zu uns?"></textarea></div>
-                        <div class="form-group"><label class="form-label">Letzter Zahnarztbesuch</label><select name="fi-select-letzter-besuch" class="form-select"><option value="">Bitte wählen</option><option value="Vor weniger als 6 Monaten">Vor weniger als 6 Monaten</option><option value="Vor 6-12 Monaten">Vor 6-12 Monaten</option><option value="Vor 1-2 Jahren">Vor 1-2 Jahren</option><option value="Vor mehr als 2 Jahren">Vor mehr als 2 Jahren</option></select></div>
+                        <div class="form-group"><label class="form-label">Grund Ihres Besuchs</label><textarea name="besuchsgrund" class="form-textarea" rows="2" placeholder="Was führt Sie zu uns?"></textarea></div>
+                        <div class="form-group"><label class="form-label">Letzter Zahnarztbesuch</label><select name="letzter_besuch" class="form-select"><option value="">Bitte wählen</option><option value="Vor weniger als 6 Monaten">Vor weniger als 6 Monaten</option><option value="Vor 6-12 Monaten">Vor 6-12 Monaten</option><option value="Vor 1-2 Jahren">Vor 1-2 Jahren</option><option value="Vor mehr als 2 Jahren">Vor mehr als 2 Jahren</option></select></div>
                         <div class="form-group"><label class="form-checkbox"><input type="checkbox" required><span>Ich bestätige die Richtigkeit meiner Angaben.</span></label></div>
                         <div class="form-group"><label class="form-checkbox"><input type="checkbox" required><span>Ich willige in die Verarbeitung meiner Gesundheitsdaten zur Vorbereitung der zahnärztlichen Behandlung ein. Hinweise zum Datenschutz finden Sie in unserer <a href="datenschutz.html" target="_blank">Datenschutzerklärung</a>.</span></label></div>
                         <div class="funnel-buttons"><button type="button" class="btn btn-back" onclick="prevStep('anamnese-modal', 5)">Zurück</button><button type="submit" class="btn btn-primary" onclick="collectAnamneseData()">Absenden</button></div>
@@ -256,24 +254,70 @@
         document.getElementById('ana-alle-daten').value = JSON.stringify(data);
     }
     </script>
-    <script type="text/plain" data-consent-required="true" src="https://forminit.com/sdk/v1/forminit.js" async></script>
     <script>
-    const forminit = new Forminit();
-    const FORM_ID = 'itxljr9u337';
-    
+    const API_URL = 'https://zahnarzt-booking-production.up.railway.app';
+
     document.getElementById('anamnese-form').addEventListener('submit', async function(e) {
         e.preventDefault();
         collectAnamneseData();
-        const formData = new FormData(this);
-        const { data, error } = await forminit.submit(FORM_ID, formData);
-        
-        if (error) {
-            document.getElementById('form-result').textContent = 'Fehler: ' + error.message;
-            document.getElementById('form-result').style.color = 'red';
-            return;
-        }
 
-        document.querySelector('#anamnese-modal .modal-body').innerHTML = '<div style="text-align:center;padding:40px 20px"><svg viewBox="0 0 24 24" fill="none" stroke="#22c55e" stroke-width="2.5" style="width:48px;height:48px;margin-bottom:16px"><polyline points="20 6 9 17 4 12"/></svg><h3 style="margin-bottom:8px">Anamnesebogen gesendet!</h3><p>Vielen Dank. Ihre Daten wurden erfolgreich übermittelt und liegen zur Vorbereitung Ihres Termins bereit.</p><div style="margin-top:24px"><button class="btn btn-primary" onclick="document.getElementById(\'anamnese-modal\').classList.remove(\'active\')">Schließen</button></div></div>';
+        const submitBtn = this.querySelector('button[type="submit"]');
+        submitBtn.disabled = true;
+        submitBtn.textContent = 'Wird gesendet...';
+
+        // Collect all data from the funnel steps
+        const erkrankungen = [];
+        if(document.getElementById('ana-herz').checked) erkrankungen.push('Herz-Kreislauf');
+        if(document.getElementById('ana-blutdruck').checked) erkrankungen.push('Bluthochdruck');
+        if(document.getElementById('ana-diabetes').checked) erkrankungen.push('Diabetes');
+        if(document.getElementById('ana-schilddruese').checked) erkrankungen.push('Schilddrüse');
+        if(document.getElementById('ana-asthma').checked) erkrankungen.push('Asthma');
+        if(document.getElementById('ana-blutgerinnung').checked) erkrankungen.push('Blutgerinnung');
+        if(document.getElementById('ana-hepatitis').checked) erkrankungen.push('Hepatitis');
+        if(document.getElementById('ana-epilepsie').checked) erkrankungen.push('Epilepsie');
+
+        const allergien = [];
+        if(document.getElementById('ana-penicillin').checked) allergien.push('Penicillin');
+        if(document.getElementById('ana-schmerzmittel').checked) allergien.push('Schmerzmittel');
+        if(document.getElementById('ana-betaeubung').checked) allergien.push('Betäubungsmittel');
+        if(document.getElementById('ana-latex').checked) allergien.push('Latex');
+
+        const data = {
+            vorname: document.getElementById('ana-vorname').value,
+            nachname: document.getElementById('ana-nachname').value,
+            geburtsdatum: document.getElementById('ana-geb').value || null,
+            geschlecht: document.getElementById('ana-geschlecht').value || null,
+            telefon: document.getElementById('ana-tel').value,
+            email: document.getElementById('ana-email').value,
+            in_behandlung: document.getElementById('ana-behandlung').value || null,
+            medikamente: document.getElementById('ana-medikamente').value || null,
+            erkrankungen: erkrankungen.join(', ') || null,
+            allergien: allergien.join(', ') || null,
+            sonstige_erkrankungen: document.getElementById('ana-sonstige').value || null,
+            sonstige_allergien: document.getElementById('ana-allergien-sonstige').value || null,
+            besuchsgrund: this.querySelector('[name="besuchsgrund"]')?.value || null,
+            letzter_besuch: this.querySelector('[name="letzter_besuch"]')?.value || null
+        };
+
+        try {
+            const response = await fetch(`${API_URL}/api/anamnese`, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(data)
+            });
+            const result = await response.json();
+
+            if (result.success) {
+                document.querySelector('#anamnese-modal .modal-body').innerHTML = '<div style="text-align:center;padding:40px 20px"><svg viewBox="0 0 24 24" fill="none" stroke="#22c55e" stroke-width="2.5" style="width:48px;height:48px;margin-bottom:16px"><polyline points="20 6 9 17 4 12"/></svg><h3 style="margin-bottom:8px">Anamnesebogen gesendet!</h3><p>Vielen Dank. Ihre Daten wurden erfolgreich übermittelt und liegen zur Vorbereitung Ihres Termins bereit.</p><div style="margin-top:24px"><button class="btn btn-primary" onclick="document.getElementById(\'anamnese-modal\').classList.remove(\'active\')">Schließen</button></div></div>';
+            } else {
+                throw new Error(result.error || 'Unbekannter Fehler');
+            }
+        } catch (error) {
+            document.getElementById('form-result').innerHTML = 'Das Senden hat leider nicht geklappt. Bitte versuchen Sie es erneut oder kontaktieren Sie uns telefonisch unter <a href="tel:042811515">04281 1515</a>.';
+            document.getElementById('form-result').style.color = '#ef4444';
+            submitBtn.disabled = false;
+            submitBtn.textContent = 'Absenden';
+        }
     });
     </script>
 </body>

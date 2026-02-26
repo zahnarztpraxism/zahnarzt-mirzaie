@@ -280,7 +280,7 @@ document.getElementById('termin-form').addEventListener('submit', async function
         }
     } catch (error) {
         // Fehler anzeigen
-        errorEl.textContent = error.message || 'Verbindungsfehler. Bitte versuchen Sie es später erneut oder rufen Sie uns an.';
+        errorEl.innerHTML = 'Das Senden hat leider nicht geklappt. Bitte versuchen Sie es erneut oder rufen Sie uns an: <a href="tel:042811515">04281 1515</a>';
         errorEl.style.display = 'block';
 
         // Button wieder aktivieren

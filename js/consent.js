@@ -23,19 +23,6 @@
     localStorage.setItem(CONSENT_EXPIRY_KEY, String(expiry));
   }
 
-  // ── Forminit activation ───────────────────────────────────────────────────
-
-  function activateForminit() {
-    var scripts = document.querySelectorAll('script[type="text/plain"][data-consent-required="true"]');
-    scripts.forEach(function (original) {
-      var replacement = document.createElement('script');
-      replacement.src = original.src;
-      if (original.hasAttribute('async')) replacement.async = true;
-      if (original.hasAttribute('defer')) replacement.defer = true;
-      original.parentNode.replaceChild(replacement, original);
-    });
-  }
-
   // ── termin.html: show/hide consent gate ───────────────────────────────────
 
   function handleTerminPage() {
@@ -81,7 +68,6 @@
           saveConsent('accepted');
           gate.style.display = 'none';
           form.style.display = '';
-          activateForminit();
         });
       } else {
         gate.style.display = '';
@@ -185,7 +171,6 @@
     document.getElementById('cookie-btn-accept').addEventListener('click', function () {
       saveConsent('accepted');
       hideBanner();
-      activateForminit();
       handleTerminPage();
     });
 
@@ -209,8 +194,6 @@
     if (!status) {
       injectStyles();
       createBanner();
-    } else if (status === 'accepted') {
-      activateForminit();
     }
 
     handleTerminPage();

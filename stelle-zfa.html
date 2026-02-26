@@ -165,15 +165,14 @@
                     <h4 style="margin-bottom:8px;color:var(--text)">Fast geschafft!</h4>
                     <p style="margin-bottom:24px;font-size:0.9375rem">Noch ein paar letzte Worte von dir.</p>
                     <form id="bewerbung-form">
-                        <input type="hidden" name="fi-text-formular" value="Bewerbung ZFA">
-                        <input type="hidden" name="fi-sender-firstName" id="bew-vorname-h">
-                        <input type="hidden" name="fi-sender-lastName" id="bew-nachname-h">
-                        <input type="hidden" name="fi-sender-email" id="bew-email-h">
-                        <input type="hidden" name="fi-sender-phone" id="bew-tel-h">
-                        <input type="hidden" name="fi-text-wohnort" id="bew-ort-h">
-                        <input type="hidden" name="fi-text-eintritt" id="bew-eintritt-h">
-                        <input type="hidden" name="fi-text-erfahrung" id="bew-erfahrung-h">
-                        <div class="form-group"><label class="form-label">Warum möchtest du bei uns arbeiten? <span class="required">*</span></label><textarea name="fi-text-motivation" class="form-textarea" rows="4" required placeholder="Was reizt dich an der Stelle?"></textarea></div>
+                        <input type="hidden" name="vorname" id="bew-vorname-h">
+                        <input type="hidden" name="nachname" id="bew-nachname-h">
+                        <input type="hidden" name="email" id="bew-email-h">
+                        <input type="hidden" name="telefon" id="bew-tel-h">
+                        <input type="hidden" name="wohnort" id="bew-ort-h">
+                        <input type="hidden" name="eintritt" id="bew-eintritt-h">
+                        <input type="hidden" name="erfahrung" id="bew-erfahrung-h">
+                        <div class="form-group"><label class="form-label">Warum möchtest du bei uns arbeiten? <span class="required">*</span></label><textarea name="motivation" class="form-textarea" rows="4" required placeholder="Was reizt dich an der Stelle?"></textarea></div>
                         <div class="form-group"><label class="form-checkbox"><input type="checkbox" required><span>Ich stimme der <a href="datenschutz.html" target="_blank">Datenschutzerklärung</a> zu.</span></label></div>
                         <div class="funnel-buttons"><button type="button" class="btn btn-back" onclick="bewPrevStep(3)">Zurück</button><button type="submit" class="btn btn-primary" onclick="collectBewData()">Bewerbung absenden</button></div>
                         <p id="form-result" class="form-result"></p>
@@ -266,24 +265,48 @@
         document.getElementById('bew-erfahrung-h').value = document.getElementById('bew-erfahrung').value;
     }
     </script>
-    <script type="text/plain" data-consent-required="true" src="https://forminit.com/sdk/v1/forminit.js" async></script>
     <script>
-    const forminit = new Forminit();
-    const FORM_ID = 'itxljr9u337';
-    
+    const API_URL = 'https://zahnarzt-booking-production.up.railway.app';
+
     document.getElementById('bewerbung-form').addEventListener('submit', async function(e) {
         e.preventDefault();
         collectBewData();
-        const formData = new FormData(this);
-        const { data, error } = await forminit.submit(FORM_ID, formData);
-        
-        if (error) {
-            document.getElementById('form-result').textContent = 'Fehler: ' + error.message;
-            document.getElementById('form-result').style.color = 'red';
-            return;
-        }
 
-        document.querySelector('.bewerbung-form-wrapper').innerHTML = '<div style="text-align:center;padding:40px 20px"><svg viewBox="0 0 24 24" fill="none" stroke="#22c55e" stroke-width="2.5" style="width:48px;height:48px;margin-bottom:16px"><polyline points="20 6 9 17 4 12"/></svg><h3 style="margin-bottom:8px">Bewerbung gesendet!</h3><p>Vielen Dank für Ihre Bewerbung. Wir melden uns zeitnah bei Ihnen.</p><div style="margin-top:24px"><a href="karriere.html" class="btn btn-primary">Zurück zu Karriere</a></div></div>';
+        const submitBtn = this.querySelector('button[type="submit"]');
+        submitBtn.disabled = true;
+        submitBtn.textContent = 'Wird gesendet...';
+
+        const data = {
+            vorname: document.getElementById('bew-vorname').value,
+            nachname: document.getElementById('bew-nachname').value,
+            email: document.getElementById('bew-email').value,
+            telefon: document.getElementById('bew-tel').value,
+            wohnort: document.getElementById('bew-ort').value || null,
+            eintritt: document.getElementById('bew-eintritt').value || null,
+            erfahrung: document.getElementById('bew-erfahrung').value || null,
+            motivation: this.querySelector('[name="motivation"]').value,
+            typ: 'ZFA'
+        };
+
+        try {
+            const response = await fetch(`${API_URL}/api/bewerbung`, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(data)
+            });
+            const result = await response.json();
+
+            if (result.success) {
+                document.querySelector('.bewerbung-form-wrapper').innerHTML = '<div style="text-align:center;padding:40px 20px"><svg viewBox="0 0 24 24" fill="none" stroke="#22c55e" stroke-width="2.5" style="width:48px;height:48px;margin-bottom:16px"><polyline points="20 6 9 17 4 12"/></svg><h3 style="margin-bottom:8px">Bewerbung gesendet!</h3><p>Vielen Dank für Ihre Bewerbung. Wir melden uns zeitnah bei Ihnen.</p><div style="margin-top:24px"><a href="karriere.html" class="btn btn-primary">Zurück zu Karriere</a></div></div>';
+            } else {
+                throw new Error(result.error || 'Unbekannter Fehler');
+            }
+        } catch (error) {
+            document.getElementById('form-result').innerHTML = 'Das Senden hat leider nicht geklappt. Bitte versuchen Sie es erneut oder kontaktieren Sie uns telefonisch unter <a href="tel:042811515">04281 1515</a>.';
+            document.getElementById('form-result').style.color = '#ef4444';
+            submitBtn.disabled = false;
+            submitBtn.textContent = 'Bewerbung absenden';
+        }
     });
     </script>
 </body>
