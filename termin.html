@@ -5,6 +5,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="Buchen Sie Ihren Zahnarzt-Termin bei Zahnarzt Mirzaie in Zeven – online oder telefonisch unter 04281 1515.">
     <title>Termin buchen | Zahnarzt Mirzaie Zeven</title>
+    <link rel="canonical" href="https://zahnarzt-mirzaie.de/termin.html">
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="Termin buchen | Zahnarzt Mirzaie Zeven">
+    <meta property="og:description" content="Buchen Sie Ihren Zahnarzt-Termin bei Zahnarzt Mirzaie in Zeven – online oder telefonisch unter 04281 1515.">
+    <meta property="og:url" content="https://zahnarzt-mirzaie.de/termin.html">
+    <meta property="og:site_name" content="Zahnarztpraxis Mirzaie">
+    <meta property="og:locale" content="de_DE">
     <link rel="icon" type="image/svg+xml" href="images/favicon.svg">
     <link rel="stylesheet" href="css/style.css">
 </head>
@@ -130,7 +137,7 @@
                     <div class="form-group">
                         <label class="form-checkbox">
                             <input type="checkbox" id="termin-datenschutz" required>
-                            <span>Ich stimme der <a href="datenschutz.html" target="_blank">Datenschutzerklärung</a> zu.</span>
+                            <span>Ich stimme der Verarbeitung meiner Daten zur Bearbeitung meiner Anfrage zu. Hinweise zum Datenschutz finden Sie in unserer <a href="datenschutz.html" target="_blank">Datenschutzerklärung</a>.</span>
                         </label>
                     </div>
                     <div class="form-submit">
@@ -203,7 +210,7 @@
             </div>
         </div>
         <div class="footer-bottom">
-            <p>© 2025 Zahnarzt Mirzaie. Alle Rechte vorbehalten.</p>
+            <p>© 2026 Zahnarzt Mirzaie. Alle Rechte vorbehalten.</p>
             <div class="footer-legal">
                 <a href="impressum.html">Impressum</a>
                 <a href="datenschutz.html">Datenschutz</a>
@@ -212,6 +219,7 @@
     </div>
 </footer>
 
+<script src="js/consent.js"></script>
 <script src="js/main.js"></script>
 <script>
 // Backend-URL
@@ -219,6 +227,14 @@ const API_URL = 'https://zahnarzt-booking-production.up.railway.app';
 
 document.getElementById('termin-form').addEventListener('submit', async function(e) {
     e.preventDefault();
+
+    // Consent-Prüfung vor dem API-Aufruf
+    if (localStorage.getItem('consent-status') !== 'accepted') {
+        const errorEl = document.getElementById('form-error');
+        errorEl.textContent = 'Bitte akzeptieren Sie die externen Dienste, um die Online-Terminbuchung zu nutzen.';
+        errorEl.style.display = 'block';
+        return;
+    }
 
     const submitBtn = document.getElementById('submit-btn');
     const btnText = document.getElementById('btn-text');
