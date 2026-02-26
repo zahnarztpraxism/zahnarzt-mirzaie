@@ -272,8 +272,8 @@
             document.getElementById('form-result').style.color = 'red';
             return;
         }
-        
-        window.location.href = 'danke.html';
+
+        document.querySelector('#anamnese-modal .modal-body').innerHTML = '<div style="text-align:center;padding:40px 20px"><svg viewBox="0 0 24 24" fill="none" stroke="#22c55e" stroke-width="2.5" style="width:48px;height:48px;margin-bottom:16px"><polyline points="20 6 9 17 4 12"/></svg><h3 style="margin-bottom:8px">Anamnesebogen gesendet!</h3><p>Vielen Dank. Ihre Daten wurden erfolgreich übermittelt und liegen zur Vorbereitung Ihres Termins bereit.</p><div style="margin-top:24px"><button class="btn btn-primary" onclick="document.getElementById(\'anamnese-modal\').classList.remove(\'active\')">Schließen</button></div></div>';
     });
     </script>
 </body>
