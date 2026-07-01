@@ -74,11 +74,11 @@
                     <p>Fragen Sie online Ihren Wunschtermin an.</p>
                     <span class="btn btn-primary btn-sm">Jetzt anfragen</span>
                 </div>
-                <div class="portal-card" onclick="openModal('anamnese-modal')">
+                <div class="portal-card" onclick="showAnamneseHinweis()">
                     <div class="portal-icon"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12h3.75M9 15h3.75M9 18h3.75m3 .75H18a2.25 2.25 0 0 0 2.25-2.25V6.108c0-1.135-.845-2.098-1.976-2.192a48.424 48.424 0 0 0-1.123-.08m-5.801 0c-.065.21-.1.433-.1.664 0 .414.336.75.75.75h4.5a.75.75 0 0 0 .75-.75 2.25 2.25 0 0 0-.1-.664m-5.8 0A2.251 2.251 0 0 1 13.5 2.25H15c1.012 0 1.867.668 2.15 1.586m-5.8 0c-.376.023-.75.05-1.124.08C9.095 4.01 8.25 4.973 8.25 6.108V8.25m0 0H4.875c-.621 0-1.125.504-1.125 1.125v11.25c0 .621.504 1.125 1.125 1.125h9.75c.621 0 1.125-.504 1.125-1.125V9.375c0-.621-.504-1.125-1.125-1.125H8.25Z"/></svg></div>
                     <h3>Anamnesebogen</h3>
-                    <p>Füllen Sie den Bogen vor Ihrem Termin aus.</p>
-                    <span class="btn btn-primary btn-sm">Bogen ausfüllen</span>
+                    <p>Den Bogen füllen Sie bequem vor Ort in der Praxis aus.</p>
+                    <span class="btn btn-primary btn-sm">Mehr erfahren</span>
                 </div>
             </div>
         </div>
@@ -225,6 +225,16 @@
     <script src="js/consent.js"></script>
     <script src="js/main.js"></script>
     <script>
+    // Zwischenlösung: Online-Anamnese deaktiviert – Hinweis sofort beim Öffnen zeigen,
+    // damit niemand Gesundheitsdaten einträgt, die nicht übermittelt werden können.
+    function showAnamneseHinweis() {
+        var modal = document.getElementById('anamnese-modal');
+        if (!modal) return;
+        modal.querySelector('.modal-body').innerHTML = '<div style="text-align:center;padding:40px 20px"><svg viewBox="0 0 24 24" fill="none" stroke="#2563eb" stroke-width="2.5" style="width:48px;height:48px;margin-bottom:16px"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg><h3 style="margin-bottom:8px">Anamnesebogen aktuell nur vor Ort</h3><p>Die Online-Anamnese ist derzeit nicht verfügbar. Ihre Gesundheitsdaten sind uns wichtig – deshalb füllen Sie den Bogen bequem direkt in der Praxis aus. Gerne senden wir ihn Ihnen auch vorab zu.</p><p style="margin-top:12px">Bei Fragen erreichen Sie uns unter <a href="tel:042811515">04281 1515</a>.</p><div style="margin-top:24px"><button class="btn btn-primary" onclick="closeModal(\'anamnese-modal\')">Verstanden</button></div></div>';
+        modal.classList.add('active');
+        document.body.style.overflow = 'hidden';
+    }
+
     function collectAnamneseData() {
         const data = {
             vorname: document.getElementById('ana-vorname').value,
