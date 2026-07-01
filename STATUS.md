@@ -1,9 +1,27 @@
 # Zahnarzt Mirzaie - Projektstatus
 
-**Stand:** 26.02.2026
-**Live:** https://zahnarzt-mirzaie.de
-**Backend:** Railway (Auto-Deploy via GitHub Push)
+**Stand:** 01.07.2026
+**Live:** https://zahnarzt-mirzaie.de (Website auf GitHub Pages, läuft)
+**Backend:** Railway — ⚠️ AKTUELL OFFLINE (siehe unten)
 **Repo:** https://github.com/zahnarztpraxism/zahnarzt-mirzaie
+**Deploy:** `gh auth switch --user zahnarztpraxism` → `git push origin main` → zurück auf sarayimbiss. Push = automatisch live. (`git config core.fileMode false` ist gesetzt.)
+
+---
+
+## ⚠️ AKTUELLER STAND 01.07.2026 — Zwischenlösung aktiv
+
+**Railway-Backend offline:** `zahnarzt-booking-production.up.railway.app` liefert "Application not found" (vermutlich Trial-Guthaben/Zahlung abgelaufen). Dadurch funktionierten die Formulare nicht mehr und es kamen keine Formular-Mails an.
+→ ⚠️ **UNGEPRÜFT, ob die PostgreSQL-Daten (Termine/Anamnese/Bewerbungen) noch existieren** — im Railway-Dashboard prüfen (`railway login`, CLI installiert aber ausgeloggt).
+
+**Umgesetzte Zwischenlösung (live, ohne Backend):**
+- **E-Mail:** überall neue `praxis@zahnarzt-mirzaie.de` → alte **`praxis_mirzaie@web.de`** ersetzt (bis Umstellung fertig). Die neue Domain-Mail funktioniert technisch komplett (Empfang Google Workspace, Versand Resend/DKIM/SPF EU).
+- **Formulare:** Kontakt / Termin / Bewerbung (Ausbildung+ZFA) senden per `mailto:praxis_mirzaie@web.de` (öffnet Mailprogramm des Besuchers → er klickt selbst Senden). Erfolgsmeldungen ehrlich ("Fast geschafft – bitte auf Senden klicken") + Telefon-Button. Schwäche: Desktop ohne Mailprogramm → evtl. keine Mail.
+- **Anamnese (service.html):** Online-Übermittlung DEAKTIVIERT — keine Gesundheitsdaten per Mail (DSGVO). Kachel zeigt via `showAnamneseHinweis()` sofort "nur vor Ort/anrufen".
+
+**Nächste Schritte (nach OP):**
+1. **Web3Forms** einrichten → Formulare senden serverseitig zuverlässig (braucht einmal Postfach-Zugriff für Bestätigung). Ersetzt die mailto-Brücke.
+2. **Railway-Datenlage prüfen** + entscheiden: Backend reaktivieren oder ablösen.
+3. **Eigenes CRM planen** (MA wollen EIN System, Integration mit Praxis-Software Z1): eigenes CRM (Z1 nur Abrechnung, einmaliger Export) vs. CGM eTermin/CLICKDOC kaufen vs. erst mit CGM Schnittstellen klären. DSGVO: Patienten-/Gesundheitsdaten = besondere Kategorie (AV-Vertrag, EU-Hosting, Verschlüsselung).
 
 ---
 
