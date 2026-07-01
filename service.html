@@ -208,7 +208,7 @@
                 </div>
                 <div class="footer-contact-item">
                     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
-                    <a href="mailto:praxis@zahnarzt-mirzaie.de">praxis@zahnarzt-mirzaie.de</a>
+                    <a href="mailto:praxis_mirzaie@web.de">praxis_mirzaie@web.de</a>
                 </div>
             </div>
         </div>
@@ -299,25 +299,9 @@
             letzter_besuch: this.querySelector('[name="letzter_besuch"]')?.value || null
         };
 
-        try {
-            const response = await fetch(`${API_URL}/api/anamnese`, {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify(data)
-            });
-            const result = await response.json();
-
-            if (result.success) {
-                document.querySelector('#anamnese-modal .modal-body').innerHTML = '<div style="text-align:center;padding:40px 20px"><svg viewBox="0 0 24 24" fill="none" stroke="#22c55e" stroke-width="2.5" style="width:48px;height:48px;margin-bottom:16px"><polyline points="20 6 9 17 4 12"/></svg><h3 style="margin-bottom:8px">Anamnesebogen gesendet!</h3><p>Vielen Dank. Ihre Daten wurden erfolgreich übermittelt und liegen zur Vorbereitung Ihres Termins bereit.</p><div style="margin-top:24px"><button class="btn btn-primary" onclick="document.getElementById(\'anamnese-modal\').classList.remove(\'active\')">Schließen</button></div></div>';
-            } else {
-                throw new Error(result.error || 'Unbekannter Fehler');
-            }
-        } catch (error) {
-            document.getElementById('form-result').innerHTML = 'Das Senden hat leider nicht geklappt. Bitte versuchen Sie es erneut oder kontaktieren Sie uns telefonisch unter <a href="tel:042811515">04281 1515</a>.';
-            document.getElementById('form-result').style.color = '#ef4444';
-            submitBtn.disabled = false;
-            submitBtn.textContent = 'Absenden';
-        }
+        // Zwischenlösung: Gesundheitsdaten werden aus Datenschutzgründen NICHT per E-Mail übertragen.
+        // Online-Übermittlung vorübergehend deaktiviert – Hinweis auf Telefon / vor Ort.
+        document.querySelector('#anamnese-modal .modal-body').innerHTML = '<div style="text-align:center;padding:40px 20px"><svg viewBox="0 0 24 24" fill="none" stroke="#2563eb" stroke-width="2.5" style="width:48px;height:48px;margin-bottom:16px"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg><h3 style="margin-bottom:8px">Online-Anamnese vorübergehend nicht verfügbar</h3><p>Aus Datenschutzgründen können Ihre Gesundheitsdaten aktuell nicht online übermittelt werden. Bitte füllen Sie den Anamnesebogen bequem vor Ort aus oder rufen Sie uns an: <a href="tel:042811515">04281 1515</a>.</p><div style="margin-top:24px"><button class="btn btn-primary" onclick="document.getElementById(\'anamnese-modal\').classList.remove(\'active\')">Schließen</button></div></div>';
     });
     </script>
 </body>

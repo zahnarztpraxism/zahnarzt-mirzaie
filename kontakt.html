@@ -96,7 +96,7 @@
                         </div>
                         <div class="contact-text">
                             <strong>E-Mail</strong>
-                            <a href="mailto:praxis@zahnarzt-mirzaie.de">praxis@zahnarzt-mirzaie.de</a>
+                            <a href="mailto:praxis_mirzaie@web.de">praxis_mirzaie@web.de</a>
                         </div>
                     </div>
                     <div class="contact-item">
@@ -194,7 +194,7 @@
                 </div>
                 <div class="footer-contact-item">
                     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
-                    <a href="mailto:praxis@zahnarzt-mirzaie.de">praxis@zahnarzt-mirzaie.de</a>
+                    <a href="mailto:praxis_mirzaie@web.de">praxis_mirzaie@web.de</a>
                 </div>
             </div>
         </div>
@@ -228,28 +228,15 @@ document.getElementById('kontakt-form').addEventListener('submit', async functio
         nachricht: this.querySelector('[name="nachricht"]').value
     };
 
-    try {
-        const response = await fetch(`${API_URL}/api/kontakt`, {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify(data)
-        });
-        const result = await response.json();
-
-        if (result.success) {
-            document.getElementById('kontakt-form').style.display = 'none';
-            document.getElementById('kontakt-success').style.display = 'block';
-            document.getElementById('kontakt-success').scrollIntoView({ behavior: 'smooth', block: 'center' });
-        } else {
-            throw new Error(result.error || 'Unbekannter Fehler');
-        }
-    } catch (error) {
-        document.getElementById('form-result').innerHTML = 'Das Senden hat leider nicht geklappt. Bitte versuchen Sie es erneut oder kontaktieren Sie uns telefonisch unter <a href="tel:042811515">04281 1515</a>.';
-        document.getElementById('form-result').style.color = '#ef4444';
-        document.getElementById('form-result').style.display = 'block';
-        submitBtn.disabled = false;
-        submitBtn.textContent = originalText;
-    }
+    // Zwischenlösung ohne Backend: Anfrage per E-Mail an die Praxis öffnen
+    const labels = { name: 'Name', email: 'E-Mail', telefon: 'Telefon', nachricht: 'Nachricht' };
+    const body = Object.entries(data).map(([k, v]) => `${labels[k] || k}: ${v || '—'}`).join('\n');
+    window.location.href = `mailto:praxis_mirzaie@web.de?subject=${encodeURIComponent('Kontaktanfrage über die Website')}&body=${encodeURIComponent(body)}`;
+    document.getElementById('kontakt-form').style.display = 'none';
+    document.getElementById('kontakt-success').style.display = 'block';
+    document.getElementById('kontakt-success').scrollIntoView({ behavior: 'smooth', block: 'center' });
+    submitBtn.disabled = false;
+    submitBtn.textContent = originalText;
 });
 </script>
 </body>

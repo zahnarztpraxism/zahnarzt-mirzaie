@@ -205,7 +205,7 @@
                 </div>
                 <div class="footer-contact-item">
                     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
-                    <a href="mailto:praxis@zahnarzt-mirzaie.de">praxis@zahnarzt-mirzaie.de</a>
+                    <a href="mailto:praxis_mirzaie@web.de">praxis_mirzaie@web.de</a>
                 </div>
             </div>
         </div>
@@ -227,14 +227,6 @@ const API_URL = 'https://zahnarzt-booking-production.up.railway.app';
 
 document.getElementById('termin-form').addEventListener('submit', async function(e) {
     e.preventDefault();
-
-    // Consent-Prüfung vor dem API-Aufruf
-    if (localStorage.getItem('consent-status') !== 'accepted') {
-        const errorEl = document.getElementById('form-error');
-        errorEl.textContent = 'Bitte akzeptieren Sie die externen Dienste, um die Online-Terminbuchung zu nutzen.';
-        errorEl.style.display = 'block';
-        return;
-    }
 
     const submitBtn = document.getElementById('submit-btn');
     const btnText = document.getElementById('btn-text');
@@ -258,36 +250,16 @@ document.getElementById('termin-form').addEventListener('submit', async function
         nachricht: document.getElementById('termin-nachricht').value || null
     };
 
-    try {
-        const response = await fetch(`${API_URL}/api/termin-anfrage`, {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify(data)
-        });
-
-        const result = await response.json();
-
-        if (result.success) {
-            // Formular ausblenden, Erfolgsmeldung zeigen
-            document.getElementById('booking-form-container').style.display = 'none';
-            document.getElementById('booking-success').style.display = 'block';
-            // Scroll zur Erfolgsmeldung
-            document.getElementById('booking-success').scrollIntoView({ behavior: 'smooth', block: 'center' });
-        } else {
-            throw new Error(result.error || 'Ein Fehler ist aufgetreten');
-        }
-    } catch (error) {
-        // Fehler anzeigen
-        errorEl.innerHTML = 'Das Senden hat leider nicht geklappt. Bitte versuchen Sie es erneut oder rufen Sie uns an: <a href="tel:042811515">04281 1515</a>';
-        errorEl.style.display = 'block';
-
-        // Button wieder aktivieren
-        submitBtn.disabled = false;
-        btnText.style.display = 'inline';
-        btnLoading.style.display = 'none';
-    }
+    // Zwischenlösung ohne Backend: Terminanfrage per E-Mail an die Praxis öffnen
+    const labels = { name: 'Name', email: 'E-Mail', telefon: 'Telefon', wunschdatum: 'Wunschdatum', wunschzeit: 'Wunschzeit', behandlung: 'Behandlung', nachricht: 'Nachricht' };
+    const body = Object.entries(data).map(([k, v]) => `${labels[k] || k}: ${v || '—'}`).join('\n');
+    window.location.href = `mailto:praxis_mirzaie@web.de?subject=${encodeURIComponent('Terminanfrage über die Website')}&body=${encodeURIComponent(body)}`;
+    document.getElementById('booking-form-container').style.display = 'none';
+    document.getElementById('booking-success').style.display = 'block';
+    document.getElementById('booking-success').scrollIntoView({ behavior: 'smooth', block: 'center' });
+    submitBtn.disabled = false;
+    btnText.style.display = 'inline';
+    btnLoading.style.display = 'none';
 });
 
 // Mindestdatum für Terminwahl auf heute setzen
